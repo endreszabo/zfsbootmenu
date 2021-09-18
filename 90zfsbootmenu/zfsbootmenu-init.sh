@@ -21,6 +21,25 @@ fi
 
 mkdir -p "${BASE}"
 
+ter_sizes=(
+  "ter-132n" "ter-128n" "ter-126n"
+  "ter-122n" "ter-120n" "ter-118n"
+  "ter-116n" "ter-114n" "ter-112n"
+)
+
+zdebug "automatically setting console font"
+target_lines=40
+
+for terminus in ter-132n ter-124n ter-116n ; do
+  setfont "${terminus}"
+  if [ "$( tput lines )" -lt "${target_lines}" ] ; then
+    continue
+  else
+    zdebug "setting font to ${terminus}"
+    break
+  fi
+done
+
 # Attempt to load spl normally
 if ! _modload="$( modprobe spl 2>&1 )" ; then
   zdebug "${_modload}"
