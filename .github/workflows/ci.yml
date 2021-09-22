@@ -23,18 +23,18 @@ jobs:
         run: |
           ln -s "$(pwd)" /zbm
           ls -lah /zbm
-           [ -x /zbm/releng/docker/zbm-build.sh ] && /zbm/releng/docker/zbm-build.sh
+          [ -x /zbm/releng/docker/zbm-build.sh ] && /zbm/releng/docker/zbm-build.sh
 
       - name: Archive EFI 
         uses: actions/upload-artifact@v2
         with:
           name: EFI 
-          path: /zbm/contrib/docker/build/*.EFI
+          path: /zbm/releng/docker/build/*.EFI
 
       - name: Archive components 
         uses: actions/upload-artifact@v2
         with:
           name: Components 
           path: |
-            /zbm/contrib/docker/build/*
-            !/zbm/contrib/docker/build/*.EFI
+            /zbm/releng/docker/build/*
+            !/zbm/releng/docker/build/*.EFI
